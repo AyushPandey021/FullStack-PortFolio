@@ -146,15 +146,9 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed left-1/2 top-4 z-[90] flex w-[min(1200px,calc(100%-40px))] -translate-x-1/2 items-center justify-between gap-4 rounded-xl px-6 py-4 transition-all duration-300 ${
           scrolled
-            ? 'min-h-[60px] border border-purple-500/15 bg-white/90 shadow-[0_20px_60px_rgba(10,15,44,0.3)] backdrop-blur-2xl dark:bg-[#0a0f2c]/90'
-            : 'min-h-[68px] border border-transparent bg-white/80 dark:bg-[#0a0f2c]/80'
+            ? 'min-h-[60px] border border-purple-500/15 bg-[#0a0f2c]/90 backdrop-blur-2xl shadow-[0_20px_60px_rgba(10,15,44,0.3)]'
+            : 'min-h-[68px] border border-transparent bg-[#0a0f2c]/80'
         }`}
-        style={{
-          background: scrolled 
-            ? 'rgba(255, 255, 255, 0.9)' 
-            : 'rgba(255, 255, 255, 0.8)',
-          backdropFilter: 'blur(20px)'
-        }}
       >
         {/* Logo */}
         <Link
@@ -171,7 +165,7 @@ export default function Navbar() {
             AP
           </motion.div>
           <strong
-            className="hidden text-gray-800 dark:text-white sm:block text-lg"
+            className="hidden text-white sm:block text-lg"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             Ayush Pandey
