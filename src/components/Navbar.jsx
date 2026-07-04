@@ -15,7 +15,7 @@ import {
   HiEnvelope,
   HiDocumentText,
 } from "react-icons/hi2";
-import Logo from "../assets/logo.png";
+import Logo from "../Assets/logo.png";
 // Add icons to navItems
 const navItemsWithIcons = navItems.map((item) => {
   const iconMap = {
