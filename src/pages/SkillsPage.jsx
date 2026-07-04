@@ -24,7 +24,7 @@ export default function SkillsPage() {
     <main className="min-h-screen bg-gradient-to-b from-[#0a0f2c] via-[#0a0f2c] to-[#1a1f3a] text-white">
       
       {/* Hero Section */}
-      <section className="relative px-5 pt-24 pb-16">
+      <section className="relative px-5 pt-24 pb-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.08)_0%,transparent_70%)]" />
         
         <div className="relative mx-auto max-w-[1200px] text-center">
@@ -106,8 +106,12 @@ export default function SkillsPage() {
                         transform: `rotate(${index * 45}deg) translateX(150px) rotate(${-index * 45}deg)`,
                       }}
                       animate={{ y: [-8, 8, -8] }}
-                      transition={{ duration: 2.4, ease: 'sine.inOut', repeat: Infinity, delay: index * 0.12 }}
-                      whileHover={{ scale: 1.2, z: 10 }}
+                     transition={{
+  duration: 2.4,
+  ease: "easeInOut",
+  repeat: Infinity,
+  delay: index * 0.12,
+}}
                     >
                       <Icon />
                     </motion.div>

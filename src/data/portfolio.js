@@ -29,13 +29,9 @@ import { HiCodeBracket, HiCommandLine, HiCpuChip, HiServerStack } from 'react-ic
 
 export const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about' },
+  { label: 'About', href: '/about' },
   { label: 'Skills', href: '/skills' },
-  { label: 'Experience', href: '/#experience' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Achievements', href: '/#achievements' },
-  { label: 'Blogs', href: '/#blogs' },
   { label: 'Contact', href: '/contact' },
 ]
 

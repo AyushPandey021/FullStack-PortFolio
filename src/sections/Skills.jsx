@@ -7,9 +7,7 @@ import SectionHeader from "../components/SectionHeader.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Shared tokens with Hero / Navbar:                                   */
-/*  Vellum #F6F2E7 · Cyanotype ink #0B2036 · Signal amber #E2A63B       */
-/*  Blueprint line #3D6B94 (light) · Phosphor mint #8FE3C8 (dark)       */
+
 
 function handleTiltMove(event) {
   const card = event.currentTarget;

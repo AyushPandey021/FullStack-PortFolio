@@ -157,6 +157,7 @@ html.lenis body {
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(20px);
   box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
 }
 
 .glass-card-hover:hover {
@@ -405,6 +406,7 @@ html.lenis body {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(118, 89, 233, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Link Styles */

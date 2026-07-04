@@ -1,10 +1,10 @@
-import { HiArrowRight } from 'react-icons/hi2'
-import { projects } from '../data/portfolio.js'
-import SectionHeader from '../components/SectionHeader.jsx'
-import MagneticButton from '../components/MagneticButton.jsx'
+import { HiArrowRight } from "react-icons/hi2";
+import { projects } from "../data/portfolio.js";
+import SectionHeader from "../components/SectionHeader.jsx";
+import MagneticButton from "../components/MagneticButton.jsx";
 
 export default function HomeProjectPreview() {
-  const featured = projects.slice(0, 3)
+  const featured = projects.slice(0, 3);
 
   return (
     <section className="section-pad home-project-preview" id="projects">
@@ -22,9 +22,15 @@ export default function HomeProjectPreview() {
         </div>
         <div className="preview-project-grid" data-stagger>
           {featured.map((project, index) => (
-            <a className="preview-project-card tilt-card" href="/projects" key={project.title}>
-              <div className={`preview-project-image bg-gradient-to-br ${project.tone}`}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
+            <a
+              className="preview-project-card tilt-card"
+              href="/projects"
+              key={project.title}
+            >
+              <div
+                className={`preview-project-image bg-gradient-to-br ${project.tone}`}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 <i />
               </div>
               <div>
@@ -37,5 +43,5 @@ export default function HomeProjectPreview() {
         </div>
       </div>
     </section>
-  )
+  );
 }
