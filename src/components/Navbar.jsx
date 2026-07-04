@@ -81,15 +81,15 @@ function MobileNavItem({ item, onClick }) {
   const Icon = item.icon;
 
   return (
-    <motion.div
+    <Link
+      to={item.href}
       onClick={onClick}
-      className="flex items-center gap-4 text-lg font-medium text-slate-900 dark:text-white cursor-pointer px-4 py-4 w-full rounded-2xl bg-slate-100/90 dark:bg-white/5 border  left-6  border-slate-200/80 dark:border-white/10 hover:bg-purple-500/10 transition-colors"
-      whileTap={{ scale: 0.98 }}
+      className="flex items-center gap-4 text-lg font-medium text-slate-900 dark:text-white cursor-pointer px-4 py-4 w-full rounded-2xl bg-slate-100/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 hover:bg-purple-500/10 transition-colors"
       style={{ fontFamily: "var(--font-display)" }}
     >
       <Icon className="w-6 h-6 text-purple-400 flex-shrink-0" />
       <span>{item.label}</span>
-    </motion.div>
+    </Link>
   );
 }
 
