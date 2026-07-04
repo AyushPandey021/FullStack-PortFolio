@@ -146,10 +146,10 @@ export default function ContactPage() {
                         Email
                       </h3>
                       <a 
-                        href="mailto:ayushpandey@example.com"
+                        href="mailto:ayushpandey4480@gmail.com"
                         className="text-white hover:text-purple-400 transition-colors link-hover"
                       >
-                        ayushpandey@example.com
+                        ayushpandey4480@gmail.com
                       </a>
                     </div>
                   </motion.div>
@@ -166,10 +166,10 @@ export default function ContactPage() {
                         Phone
                       </h3>
                       <a 
-                        href="tel:+91000000000"
+                        href="tel:+91914194480"
                         className="text-white hover:text-purple-400 transition-colors link-hover"
                       >
-                        +91 00000 00000
+                        +91 917419 4480
                       </a>
                     </div>
                   </motion.div>
@@ -185,7 +185,7 @@ export default function ContactPage() {
                       <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">
                         Location
                       </h3>
-                      <p className="text-gray-300">India</p>
+                      <p className="text-gray-300">Hyderabad , India</p>
                     </div>
                   </motion.div>
                 </div>

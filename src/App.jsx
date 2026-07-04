@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { TransitionProvider } from "./context/TransitionContext.jsx";
 import { useLenis } from "./hooks/useLenis.js";
 import { useRevealAnimations } from "./hooks/useRevealAnimations.js";
 import Navbar from "./components/Navbar.jsx";
@@ -9,24 +10,12 @@ import ScrollProgress from "./components/ScrollProgress.jsx";
 import CustomCursor from "./components/CustomCursor.jsx";
 import CommandPalette from "./components/CommandPalette.jsx";
 import FloatingAssistant from "./components/FloatingAssistant.jsx";
+import PageTransition from "./components/PageTransition.jsx";
 import Home from "./pages/Home.jsx";
 import ProjectsPage from "./pages/ProjectsPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import SkillsPage from "./pages/SkillsPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
-
-function PageShell({ children }) {
-  return (
-    <motion.main
-      initial={{ opacity: 0, y: 20, filter: "blur(12px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: -16, filter: "blur(10px)" }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.main>
-  );
-}
 
 export default function App() {
   const location = useLocation();
@@ -35,64 +24,80 @@ export default function App() {
 
   return (
     <ThemeProvider>
+      <TransitionProvider>
+        <RoutesContent location={location} />
+      </TransitionProvider>
+    </ThemeProvider>
+  );
+}
+
+function RoutesContent({ location }) {
+  return (
+    <>
+      {/* Global Background - Always persists during transitions */}
+      <div className="fixed inset-0 -z-50 bg-gradient-to-br from-[#fafafa] via-[#fafafa] to-[#f4f4f5] dark:bg-gradient-to-br dark:from-[#0a0f2c] dark:via-[#0a0f2c] dark:to-[#1a1f3a] transition-colors duration-500"></div>
+      
+      {/* Theme Background - Always persists */}
+      <div className="fixed inset-0 -z-40 bg-[var(--bg-primary)] transition-colors duration-500"></div>
+      
       <Loader />
       <ScrollProgress />
       <CustomCursor />
       <Navbar />
       <CommandPalette />
       <FloatingAssistant />
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route
             path="/"
             element={
-              <PageShell>
+              <PageTransition>
                 <Home />
-              </PageShell>
+              </PageTransition>
             }
           />
           <Route
             path="/projects"
             element={
-              <PageShell>
+              <PageTransition>
                 <ProjectsPage />
-              </PageShell>
+              </PageTransition>
             }
           />
           <Route
             path="/contact"
             element={
-              <PageShell>
+              <PageTransition>
                 <ContactPage />
-              </PageShell>
+              </PageTransition>
             }
           />
           <Route
             path="/skills"
             element={
-              <PageShell>
+              <PageTransition>
                 <SkillsPage />
-              </PageShell>
+              </PageTransition>
             }
           />
           <Route
             path="/about"
             element={
-              <PageShell>
+              <PageTransition>
                 <AboutPage />
-              </PageShell>
+              </PageTransition>
             }
           />
           <Route
             path="*"
             element={
-              <PageShell>
+              <PageTransition>
                 <Home />
-              </PageShell>
+              </PageTransition>
             }
           />
         </Routes>
       </AnimatePresence>
-    </ThemeProvider>
+    </>
   );
 }

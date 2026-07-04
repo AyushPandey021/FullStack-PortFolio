@@ -40,14 +40,26 @@
   --text-secondary: #64748b;
   --text-muted: #94a3b8;
   
+  /* Accent Colors */
+  --primary-navy: #6c5ce7;
+  --primary-purple: #6c5ce7;
+  --primary-electric: #a29bfe;
+  --accent-cyan: #00d4ff;
+  --accent-orange: #ff6b35;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --gradient-secondary: linear-gradient(135deg, #00d4ff 0%, #6c5ce7 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(162, 155, 254, 0.05) 100%);
+  
   /* Glass Effect for Light Mode */
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(108, 92, 231, 0.1);
+  --glass-shadow: 0 8px 32px rgba(108, 92, 231, 0.08);
   
   /* Card Colors */
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --card-border: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.98);
+  --card-border: rgba(108, 92, 231, 0.1);
 }
 
 /* Dark Mode Variables */
@@ -658,27 +670,24 @@ html.lenis body {
 /* Light Mode Specific Overrides */
 .light {
   /* Main background and text colors */
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(108, 92, 231, 0.1);
+  --glass-shadow: 0 8px 32px rgba(108, 92, 231, 0.08);
   
   /* Card styles for light mode */
   .glass-card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(108, 92, 231, 0.1);
+    box-shadow: 0 8px 32px rgba(108, 92, 231, 0.08);
   }
   
   .glass-card-hover:hover {
     border-color: rgba(108, 92, 231, 0.3);
-    box-shadow: 0 12px 40px rgba(108, 92, 231, 0.2);
+    box-shadow: 0 12px 40px rgba(108, 92, 231, 0.15);
   }
   
   /* Text colors */
   color: #1e293b;
-  
-  /* Background colors */
-  background-color: #ffffff;
   
   /* Button styles */
   .btn-primary {
@@ -692,13 +701,13 @@ html.lenis body {
   }
   
   .btn-secondary {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(108, 92, 231, 0.1);
     color: #1e293b;
   }
   
   .btn-secondary:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);
     border-color: rgba(108, 92, 231, 0.3);
   }
   
@@ -711,17 +720,17 @@ html.lenis body {
     background: linear-gradient(90deg, #6c5ce7, #00d4ff);
   }
   
-  /* Border colors */
+  /* Border colors - use theme-aware colors */
   .border-white\/10 {
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(108, 92, 231, 0.1);
   }
   
   .bg-white\/5 {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.9);
   }
   
   .bg-white\/8 {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.95);
   }
   
   /* Global text color overrides for light mode */
@@ -742,8 +751,8 @@ html.lenis body {
   .floating-nav {
     backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 92, 231, 0.1);
+    box-shadow: 0 8px 32px rgba(108, 92, 231, 0.08);
   }
   
   /* Scrollbar for light mode */
@@ -757,7 +766,7 @@ html.lenis body {
   
   /* Particle background for light mode */
   .particle {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(108, 92, 231, 0.05);
   }
   
   /* Selection styling for light mode */
@@ -780,14 +789,14 @@ html.lenis body {
   /* Tooltip for light mode */
   .tooltip::after {
     background: rgba(255, 255, 255, 0.98);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 92, 231, 0.1);
     color: #1e293b;
   }
   
   /* Form elements for light mode */
   input, textarea {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(108, 92, 231, 0.1);
     color: #1e293b;
   }
   
@@ -798,6 +807,14 @@ html.lenis body {
   /* Section styling */
   section {
     background-color: transparent;
+  }
+  
+  /* Text gradient for light mode */
+  .text-gradient {
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 

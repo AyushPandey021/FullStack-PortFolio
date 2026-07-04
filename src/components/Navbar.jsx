@@ -178,7 +178,7 @@ export default function Navbar() {
         <img
           src={Logo}
           alt="Ayush Pandey Logo"
-          className="h-full w-full object-cover invert dark:invert-0"
+          className="h-full w-full object-cover dark:invert"
         />
       </motion.div>
 
