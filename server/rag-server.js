@@ -161,8 +161,8 @@ async function generateRAGResponse(userMessage) {
             return "I'm unable to connect to Mistral AI. Please set MISTRAL_API_KEY in your .env file. Get a key from https://console.mistral.ai/"
         }
         
-        if (apiKey.length < 30) {
-            return "Invalid API key. Mistral keys are 40+ characters. Please check your .env file."
+        if (apiKey.length < 20) {
+            return "Invalid API key. Mistral keys are 30+ characters. Please check your .env file."
         }
 
         // Get context from knowledge base
@@ -179,7 +179,7 @@ Be concise (2-4 sentences), professional, and only answer from the knowledge bas
         // Make API call using RAW HTTPS - NO SDK
         const response = await new Promise((resolve, reject) => {
             const postData = JSON.stringify({
-                model: 'mistral-small-latest',
+                model: 'mistral-small',
                 messages: [
                     { role: 'system', content: systemPrompt },
                     { role: 'user', content: userMessage }
@@ -191,7 +191,7 @@ Be concise (2-4 sentences), professional, and only answer from the knowledge bas
             const options = {
                 hostname: 'api.mistral.ai',
                 port: 443,
-                path: '/v0/chat/completions',
+                path: '/v1/chat/completions',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -202,17 +202,20 @@ Be concise (2-4 sentences), professional, and only answer from the knowledge bas
 
             const req = https.request(options, res => {
                 let data = ''
-                res.on('data', chunk => data += chunk)
+                res.on('data', chunk => { data += chunk })
                 res.on('end', () => {
+                    if (res.statusCode !== 200) {
+                        return reject(new Error(data || 'API request failed'))
+                    }
                     try {
                         const parsed = JSON.parse(data)
                         if (parsed.choices?.[0]?.message?.content) {
                             resolve(parsed.choices[0].message.content)
                         } else {
-                            reject(new Error('Invalid API response'))
+                            reject(new Error('Invalid API response format'))
                         }
-                    } catch (err) {
-                        reject(err)
+                    } catch (e) {
+                        reject(e)
                     }
                 })
             })
@@ -227,10 +230,13 @@ Be concise (2-4 sentences), professional, and only answer from the knowledge bas
         console.error('API Error:', error.message)
         const msg = error?.message?.toLowerCase() || ''
         
-        if (msg.includes('401') || msg.includes('authentication') || msg.includes('invalid')) {
+        if (msg.includes('401') || msg.includes('unauthorized') || msg.includes('authentication') || msg.includes('invalid api key')) {
             return "Authentication failed. Please check your MISTRAL_API_KEY is valid (40+ characters from console.mistral.ai)."
         }
-        if (msg.includes('429')) {
+        if (msg.includes('404') || msg.includes('no route')) {
+            return "API endpoint not found. Please check your Mistral API key and ensure you're using the correct model (mistral-small-latest)."
+        }
+        if (msg.includes('429') || msg.includes('rate limit')) {
             return "Rate limited. Please wait and try again."
         }
         if (msg.includes('network') || msg.includes('econn')) {
