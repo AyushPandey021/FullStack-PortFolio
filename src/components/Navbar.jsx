@@ -83,8 +83,7 @@ function MobileNavItem({ item, onClick }) {
   return (
     <motion.div
       onClick={onClick}
-      className="flex items-center gap-4 text-xl font-semibold text-slate-800 dark:text-white cursor-pointer px-6 py-4"
-      whileHover={{ scale: 1.02, x: 5 }}
+      className="flex items-center gap-4 text-lg font-medium text-slate-800 dark:text-white cursor-pointer px-4 py-3 w-full rounded-lg hover:bg-purple-500/10 transition-colors"
       whileTap={{ scale: 0.98 }}
       style={{ fontFamily: "var(--font-display)" }}
     >
@@ -215,7 +214,7 @@ export default function Navbar() {
             transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
           >
             <button
-              className="absolute right-6 top-6 grid size-11 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-white/5 dark:bg-white/5 hover:bg-purple-500/10 transition-colors"
+              className="absolute right-4 top-4 grid size-11 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-white/5 dark:bg-white/5 hover:bg-purple-500/10 transition-colors"
               onClick={close}
               aria-label="Close menu"
             >
@@ -223,7 +222,7 @@ export default function Navbar() {
             </button>
 
             <motion.nav
-              className="flex flex-col items-start gap-2 px-8 max-w-sm"
+              className="flex flex-col items-start gap-1 px-6 pt-16 w-full max-w-sm"
               initial="hidden"
               animate="show"
               variants={{
