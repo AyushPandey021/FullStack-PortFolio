@@ -83,15 +83,13 @@ function MobileNavItem({ item, onClick }) {
   return (
     <motion.div
       onClick={onClick}
-      className="flex items-center justify-center gap-4 text-2xl font-bold text-slate-800 dark:text-white cursor-pointer"
-      whileHover={{ scale: 1.02, x: 10 }}
+      className="flex items-center gap-4 text-xl font-semibold text-slate-800 dark:text-white cursor-pointer px-6 py-4"
+      whileHover={{ scale: 1.02, x: 5 }}
       whileTap={{ scale: 0.98 }}
       style={{ fontFamily: "var(--font-display)" }}
     >
-      <Link to={item.href} className="flex items-center justify-center gap-4">
-        <Icon className="w-6 h-6 text-purple-400" />
-        {item.label}
-      </Link>
+      <Icon className="w-6 h-6 text-purple-400 flex-shrink-0" />
+      <span>{item.label}</span>
     </motion.div>
   );
 }
@@ -210,22 +208,22 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[120] grid place-items-center bg-white/98 text-slate-800 dark:bg-[#0a0f2c]/98 dark:text-white"
+            className="fixed inset-0 z-[120] flex items-center justify-start bg-white/98 text-slate-800 dark:bg-[#0a0f2c]/98 dark:text-white"
             initial={{ clipPath: "circle(0% at 92% 7%)" }}
             animate={{ clipPath: "circle(145% at 92% 7%)" }}
             exit={{ clipPath: "circle(0% at 92% 7%)" }}
             transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
           >
             <button
-              className="absolute right-6 top-6 grid size-11 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-white/5 dark:bg-white/5"
+              className="absolute right-6 top-6 grid size-11 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-white/5 dark:bg-white/5 hover:bg-purple-500/10 transition-colors"
               onClick={close}
               aria-label="Close menu"
             >
-              <HiXMark className="text-slate-800 dark:text-white" />
+              <HiXMark className="text-slate-800 dark:text-white text-xl" />
             </button>
 
             <motion.nav
-              className="grid gap-4 text-center"
+              className="flex flex-col items-start gap-2 px-8 max-w-sm"
               initial="hidden"
               animate="show"
               variants={{
