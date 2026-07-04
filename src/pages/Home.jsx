@@ -79,7 +79,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center px-4 md:px-5 pt-28 pb-16 md:pb-20 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center px-4 md:px-5 pt-28 pb-16 md:pb-20 overflow-hidden bg-white/50 dark:bg-[#0a0f2c]/80"
       >
         {/* Background Effects — this layer parallaxes, content below does not */}
         <motion.div
@@ -131,10 +131,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/5 dark:bg-purple-500/10 px-4 py-2 mb-6"
+              className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 dark:bg-purple-500/20 px-4 py-2 mb-6 backdrop-blur-sm"
             >
               <span className="size-2 animate-pulse rounded-full bg-purple-500" />
-              <span className="text-xs font-medium uppercase tracking-wider text-purple-500 dark:text-purple-400">
+              <span className="text-xs font-medium uppercase tracking-wider text-purple-600 dark:text-purple-300">
                 Available for new builds
               </span>
             </motion.div>
@@ -144,7 +144,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-              className="text-[clamp(2.75rem,8vw,5rem)] font-bold leading-[1.1] tracking-tight mb-5"
+              className="text-[clamp(2.75rem,8vw,5rem)] font-bold leading-[1.1] tracking-tight mb-5 text-slate-800 dark:text-white"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Ayush Pandey
@@ -155,10 +155,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="flex items-center gap-2 text-lg md:text-xl font-medium text-purple-500 dark:text-purple-400 mb-8 min-h-[1.75rem]"
+              className="flex items-center gap-2 text-lg md:text-xl font-medium text-purple-600 dark:text-purple-300 mb-8 min-h-[1.75rem]"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              <span aria-hidden className="text-purple-500 dark:text-purple-400">&gt;</span>
+              <span aria-hidden className="text-purple-600 dark:text-purple-300">&gt;</span>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={titles[titleIndex]}
@@ -170,7 +170,7 @@ export default function Home() {
                   {titles[titleIndex]}
                 </motion.span>
               </AnimatePresence>
-              <span className="caret text-purple-500 dark:text-purple-400" aria-hidden>
+              <span className="caret text-purple-600 dark:text-purple-300" aria-hidden>
                 _
               </span>
             </motion.div>
@@ -180,7 +180,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className="max-w-xl text-lg text-slate-600 dark:text-gray-300 leading-relaxed mb-10"
+              className="max-w-xl text-lg text-slate-700 dark:text-gray-200 leading-relaxed mb-10"
             >
               I design and ship full-stack systems — React interfaces, Node and
               FastAPI services, and the AI layers that connect them — built to
