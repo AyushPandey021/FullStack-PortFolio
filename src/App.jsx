@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { TransitionProvider } from "./context/TransitionContext.jsx";
 import { useLenis } from "./hooks/useLenis.js";
@@ -33,14 +34,31 @@ export default function App() {
 }
 
 function RoutesContent({ location }) {
+  // ensure page is scrolled to top when navigating between routes
+  useEffect(() => {
+    try {
+      if (window.lenis && typeof window.lenis.scrollTo === "function") {
+        // prefer Lenis-controlled scroll if available
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    } catch (err) {
+      // fallback
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
   return (
     <>
       {/* Global Background - Always persists during transitions */}
       <div className="fixed inset-0 -z-50 bg-gradient-to-br from-[#fafafa] via-[#fafafa] to-[#f4f4f5] dark:bg-gradient-to-br dark:from-[#0a0f2c] dark:via-[#0a0f2c] dark:to-[#1a1f3a] transition-colors duration-500"></div>
-      
+
       {/* Theme Background - Always persists */}
       <div className="fixed inset-0 -z-40 bg-[var(--bg-primary)] transition-colors duration-500"></div>
-      
+
       <Loader />
       <ScrollProgress />
       <CustomCursor />
