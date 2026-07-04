@@ -4,7 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext.jsx";
 import { navItems } from "../data/portfolio.js";
 import {
-  HiArrowDownTray,
   HiBars3,
   HiMoon,
   HiSun,
@@ -14,6 +13,7 @@ import {
   HiCodeBracket,
   HiBriefcase,
   HiEnvelope,
+  HiDocumentText,
 } from "react-icons/hi2";
 import Logo from "../assets/logo.png";
 // Add icons to navItems
@@ -23,6 +23,7 @@ const navItemsWithIcons = navItems.map((item) => {
     About: HiUser,
     Skills: HiCodeBracket,
     Projects: HiBriefcase,
+    Resume: HiDocumentText,
     Contact: HiEnvelope,
   };
   return {
@@ -52,31 +53,6 @@ function MagneticIcon({ children, onClick, label }) {
     >
       {children}
     </button>
-  );
-}
-
-function ResumeLink() {
-  const [style, setStyle] = useState({});
-
-  const move = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - (rect.left + rect.width / 2)) * 0.25;
-    const y = (event.clientY - (rect.top + rect.height / 2)) * 0.3;
-    setStyle({ transform: `translate(${x}px, ${y}px)` });
-  };
-
-  return (
-    <a
-      href="/resume.pdf"
-      download
-      style={style}
-      onMouseMove={move}
-      onMouseLeave={() => setStyle({ transform: "translate(0,0)" })}
-      className="hidden flex-shrink-0 items-center gap-2 rounded-lg border border-dashed border-purple-500/30 px-4 py-2.5 text-sm font-semibold text-purple-500 dark:text-purple-400 transition-transform duration-200 ease-out hover:bg-purple-500/10 xl:inline-flex"
-    >
-      <HiArrowDownTray />
-      Resume
-    </a>
   );
 }
 
@@ -217,9 +193,6 @@ export default function Navbar() {
           <HiMoon className="h-5 w-5" />
         )}
       </MagneticIcon>
-
-      {/* Resume */}
-      <ResumeLink />
 
       {/* Mobile Menu */}
       <button

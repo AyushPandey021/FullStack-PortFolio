@@ -37,7 +37,7 @@
   
   /* Text Colors */
   --text-primary: #1e293b;
-  --text-secondary: #64748b;
+  --text-secondary: #475569;
   --text-muted: #94a3b8;
   
   /* Accent Colors */
@@ -71,8 +71,20 @@
   
   /* Text Colors */
   --text-primary: #ffffff;
-  --text-secondary: #a29bfe;
-  --text-muted: #6c5ce7;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  /* Accent Colors */
+  --primary-navy: #0a0f2c;
+  --primary-purple: #6c5ce7;
+  --primary-electric: #a29bfe;
+  --accent-cyan: #00d4ff;
+  --accent-orange: #ff6b35;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --gradient-secondary: linear-gradient(135deg, #00d4ff 0%, #6c5ce7 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(118, 89, 233, 0.1) 0%, rgba(162, 155, 254, 0.05) 100%);
   
   /* Glass Effect for Dark Mode */
   --glass-bg: rgba(10, 15, 44, 0.8);
@@ -277,6 +289,27 @@ html.lenis body {
 .no-transition,
 .no-transition * {
   transition: none !important;
+}
+
+/* Theme-aware text colors */
+.text-slate-600 {
+  color: var(--text-secondary);
+}
+
+.text-slate-800 {
+  color: var(--text-primary);
+}
+
+.text-gray-300 {
+  color: var(--text-muted);
+}
+
+.text-gray-400 {
+  color: var(--text-muted);
+}
+
+.text-white {
+  color: var(--text-primary);
 }
 
 /* Text Gradient */
