@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { HiSparkles, HiXMark, HiPaperAirplane } from "react-icons/hi2";
+import { HiSparkles, HiXMark, HiPaperAirplane, HiExclamationTriangle } from "react-icons/hi2";
 import {
   initializeSocket,
   getSocket,
@@ -8,6 +8,8 @@ import {
   onMessageReceived,
   onConnect,
   onDisconnect,
+  onError,
+  onConnectError,
 } from "../utils/socket";
 import ChatMessage from "./ChatMessage";
 
@@ -24,6 +26,7 @@ export default function FloatingAssistant() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
   const socketRef = useRef(null);
 
@@ -34,6 +37,7 @@ export default function FloatingAssistant() {
     // Handle connection
     onConnect(() => {
       setIsConnected(true);
+      setError(null);
       console.log("Socket connected");
     });
 
@@ -41,6 +45,13 @@ export default function FloatingAssistant() {
     onDisconnect(() => {
       setIsConnected(false);
       console.log("Socket disconnected");
+    });
+
+    // Handle connection errors
+    onConnectError((error) => {
+      console.error("Socket connection error:", error);
+      setIsConnected(false);
+      setError("Unable to connect to the AI assistant server. Please ensure the backend is running.");
     });
 
     // Handle incoming messages
@@ -55,6 +66,25 @@ export default function FloatingAssistant() {
         },
       ]);
       setIsLoading(false);
+      setError(null);
+    });
+
+    // Handle errors from the server
+    onError((data) => {
+      setIsLoading(false);
+      const errorMessage = data.error || data.message || "An error occurred. Please try again.";
+      setError(errorMessage);
+      // Also add error as a message to the chat
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          text: errorMessage,
+          isUser: false,
+          timestamp: new Date(),
+          isError: true,
+        },
+      ]);
     });
 
     return () => {
@@ -116,6 +146,16 @@ export default function FloatingAssistant() {
                 <HiXMark />
               </button>
             </div>
+
+            {/* Error Banner */}
+            {error && !isConnected && (
+              <div className="bg-red-50 border-b border-red-200 p-3 text-xs text-red-700 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300">
+                <div className="flex items-center gap-2">
+                  <HiExclamationTriangle className="flex-shrink-0" size={14} />
+                  <span>{error}</span>
+                </div>
+              </div>
+            )}
 
             {/* Messages Container */}
             <div className="flex-1 overflow-y-auto p-4 space-y-2">

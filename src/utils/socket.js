@@ -9,6 +9,22 @@ export const initializeSocket = (serverUrl = 'http://localhost:3000') => {
             reconnectionDelay: 1000,
             reconnectionDelayMax: 5000,
             reconnectionAttempts: 5,
+            transports: ['websocket', 'polling'],
+            upgrade: true,
+            rejectUnauthorized: false,
+        })
+
+        // Log connection status
+        socket.on('connect', () => {
+            console.log('✅ Socket connected')
+        })
+
+        socket.on('disconnect', () => {
+            console.log('❌ Socket disconnected')
+        })
+
+        socket.on('connect_error', (error) => {
+            console.error('❌ Socket connection error:', error)
         })
     }
     return socket
@@ -39,6 +55,16 @@ export const sendMessage = (message) => {
 export const onMessageReceived = (callback) => {
     const socketInstance = getSocket()
     socketInstance.on('chat:response', callback)
+}
+
+export const onError = (callback) => {
+    const socketInstance = getSocket()
+    socketInstance.on('chat:error', callback)
+}
+
+export const onConnectError = (callback) => {
+    const socketInstance = getSocket()
+    socketInstance.on('connect_error', callback)
 }
 
 export const onConnect = (callback) => {
