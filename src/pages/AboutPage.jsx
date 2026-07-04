@@ -4,10 +4,10 @@ import SectionHeader from '../components/SectionHeader.jsx';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0a0f2c] via-[#0a0f2c] to-[#1a1f3a] text-white">
+    <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
       {/* Hero Section */}
       <section className="relative px-5 pt-24 pb-16">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.1)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.05)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.1)_0%,transparent_70%)]" />
         
         <div className="relative mx-auto max-w-[1200px] text-center">
           <motion.div 
@@ -16,7 +16,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="mb-6"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-2 text-xs font-medium uppercase tracking-wider text-purple-400">
+            <span className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/5 dark:bg-purple-500/10 px-4 py-2 text-xs font-medium uppercase tracking-wider text-purple-500 dark:text-purple-400">
               About Me
             </span>
           </motion.div>
@@ -25,7 +25,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-            className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-tight text-white mb-6"
+            className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-tight text-slate-800 dark:text-white mb-6"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             A Developer Who <span className="text-gradient">Thinks in Systems</span>,
@@ -37,7 +37,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed"
+            className="max-w-2xl mx-auto text-lg text-slate-600 dark:text-gray-300 leading-relaxed"
           >
             Ayush combines product taste with full-stack execution: crisp interfaces, 
             reliable APIs, database design, AI integrations, and deployment workflows 

@@ -75,7 +75,7 @@ export default function Home() {
   }));
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0a0f2c] via-[#0a0f2c] to-[#1a1f3a] text-white overflow-x-hidden">
+    <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden">
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -86,12 +86,12 @@ export default function Home() {
           className="absolute inset-0 pointer-events-none"
           style={{ y: bgY }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.1)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.05)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(118,89,233,0.1)_0%,transparent_70%)]" />
 
           {particles.map((particle) => (
             <motion.div
               key={particle.id}
-              className="absolute rounded-full bg-purple-500/10"
+              className="absolute rounded-full bg-purple-500/5 dark:bg-purple-500/10"
               style={{
                 width: particle.size,
                 height: particle.size,
@@ -117,9 +117,9 @@ export default function Home() {
             />
           ))}
 
-          <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-purple-500/10 blur-3xl animate-pulse-glow" />
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-purple-500/5 blur-3xl animate-pulse-glow dark:bg-purple-500/10" />
           <div
-            className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-cyan-500/10 blur-3xl animate-pulse-glow"
+            className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-cyan-500/5 blur-3xl animate-pulse-glow dark:bg-cyan-500/10"
             style={{ animationDelay: "2s" }}
           />
         </motion.div>
@@ -131,10 +131,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-2 mb-6"
+              className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/5 dark:bg-purple-500/10 px-4 py-2 mb-6"
             >
               <span className="size-2 animate-pulse rounded-full bg-purple-500" />
-              <span className="text-xs font-medium uppercase tracking-wider text-purple-400">
+              <span className="text-xs font-medium uppercase tracking-wider text-purple-500 dark:text-purple-400">
                 Available for new builds
               </span>
             </motion.div>
@@ -155,10 +155,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="flex items-center gap-2 text-lg md:text-xl font-medium text-purple-400 mb-8 min-h-[1.75rem]"
+              className="flex items-center gap-2 text-lg md:text-xl font-medium text-purple-500 dark:text-purple-400 mb-8 min-h-[1.75rem]"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              <span aria-hidden>&gt;</span>
+              <span aria-hidden className="text-purple-500 dark:text-purple-400">&gt;</span>
               <AnimatePresence mode="wait">
                 <motion.span
                   key={titles[titleIndex]}
@@ -170,7 +170,7 @@ export default function Home() {
                   {titles[titleIndex]}
                 </motion.span>
               </AnimatePresence>
-              <span className="caret" aria-hidden>
+              <span className="caret text-purple-500 dark:text-purple-400" aria-hidden>
                 _
               </span>
             </motion.div>
@@ -180,7 +180,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className="max-w-xl text-lg text-gray-300 leading-relaxed mb-10"
+              className="max-w-xl text-lg text-slate-600 dark:text-gray-300 leading-relaxed mb-10"
             >
               I design and ship full-stack systems — React interfaces, Node and
               FastAPI services, and the AI layers that connect them — built to
@@ -233,7 +233,7 @@ export default function Home() {
           >
             <div className="relative">
               <motion.div
-                className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-2xl border border-purple-500/20 bg-white/5 backdrop-blur-xl p-6 shadow-2xl"
+                className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-2xl border border-purple-500/20 bg-white/80 dark:bg-white/5 backdrop-blur-xl p-6 shadow-2xl dark:shadow-2xl"
                 animate={{ rotate: [0, 5, 0, -5, 0] }}
                 transition={{
                   duration: 20,
@@ -297,7 +297,7 @@ export default function Home() {
         {/* Scroll Indicator */}
         <motion.a
           href="#highlights"
-          className="absolute bottom-6 md:bottom-8 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 text-xs font-medium uppercase tracking-wider text-gray-400 hover:text-purple-400 transition-colors"
+          className="absolute bottom-6 md:bottom-8 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
           whileHover={{ y: -5 }}
         >
           <span>Scroll to explore</span>
@@ -305,7 +305,7 @@ export default function Home() {
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
           >
-            <HiArrowDown />
+            <HiArrowDown className="text-slate-500 dark:text-gray-400" />
           </motion.span>
         </motion.a>
       </section>
@@ -314,7 +314,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-        className="relative mx-auto mt-16 grid w-full max-w-[1200px] grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-4 sm:gap-4"
+        className="relative mx-auto mt-16 grid w-full max-w-[1200px] grid-cols-2 gap-6 border-t border-slate-200/10 dark:border-white/10 pt-8 sm:grid-cols-4 sm:gap-4"
       >
         {profileStats.map((stat) => (
           <motion.div
@@ -324,7 +324,7 @@ export default function Home() {
             className="flex flex-col items-center justify-center px-3 py-2 text-center"
           >
             <strong
-              className="mb-3 block text-3xl font-black text-white sm:text-4xl"
+              className="mb-3 block text-3xl font-black text-slate-800 dark:text-white sm:text-4xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <CountUp
@@ -336,7 +336,7 @@ export default function Home() {
               {stat.suffix}
             </strong>
 
-            <div className="flex flex-col items-center text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">
+            <div className="flex flex-col items-center text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-gray-400">
               {stat.label.split(" ").map((word) => (
                 <span key={word} className="leading-5">
                   {word}
@@ -398,7 +398,7 @@ export default function Home() {
                 key={item.title}
                 variants={staggerItem}
                 whileHover={{ y: -5, scale: 1.01 }}
-                className="glass-card rounded-xl border border-white/10 p-6 transition-colors hover:border-purple-500/30"
+                className="glass-card rounded-xl border border-slate-200/10 dark:border-white/10 p-6 transition-colors hover:border-purple-500/30"
               >
                 <motion.div
                   className="text-3xl mb-4"
@@ -406,10 +406,10 @@ export default function Home() {
                 >
                   {item.icon}
                 </motion.div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>
@@ -440,7 +440,7 @@ export default function Home() {
                 key={label}
                 variants={staggerItem}
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="glass-card rounded-xl border border-white/10 p-6 md:p-8 text-center transition-colors hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(118,89,233,0.15)]"
+                className="glass-card rounded-xl border border-slate-200/10 dark:border-white/10 p-6 md:p-8 text-center transition-colors hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(118,89,233,0.15)]"
               >
                 <motion.strong
                   className="block text-4xl md:text-5xl font-black text-gradient mb-4"
@@ -456,7 +456,7 @@ export default function Home() {
                   />
                   {suffix}
                 </motion.strong>
-                <span className="font-bold text-gray-400">{label}</span>
+                <span className="font-bold text-slate-600 dark:text-gray-400">{label}</span>
                 <motion.div
                   className="mt-4 h-1 w-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full origin-left"
                   initial={{ scaleX: 0 }}
@@ -480,17 +480,17 @@ export default function Home() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-6 leading-tight">
                 Building the Next Generation of{" "}
                 <span className="text-gradient">Digital Experiences</span>
               </h2>
-              <p className="text-gray-300 leading-relaxed mb-6">
+              <p className="text-slate-600 dark:text-gray-300 leading-relaxed mb-6">
                 I specialize in creating full-stack applications that combine
                 beautiful, responsive interfaces with robust backend systems.
                 From concept to deployment, I ensure every project meets the
                 highest standards of quality and performance.
               </p>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-300 leading-relaxed">
                 With expertise in both frontend and backend development, I
                 bridge the gap between design and functionality. My work focuses
                 on delivering value through clean code, intuitive user
@@ -505,8 +505,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
               className="relative"
             >
-              <div className="glass-card rounded-xl border border-white/10 p-8">
-                <h3 className="text-xl font-bold text-white mb-6">
+              <div className="glass-card rounded-xl border border-slate-200/10 dark:border-white/10 p-8">
+                <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-6">
                   My Development Philosophy
                 </h3>
                 <motion.div
@@ -544,7 +544,7 @@ export default function Home() {
                         className={`w-2 h-2 rounded-full ${principle.color} mt-2 flex-shrink-0`}
                         whileHover={{ scale: 1.2 }}
                       />
-                      <p className="text-gray-300">{principle.text}</p>
+                      <p className="text-slate-600 dark:text-gray-300">{principle.text}</p>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -563,7 +563,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h3 className="text-2xl font-bold text-white mb-8">
+            <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-8">
               Let's Connect
             </h3>
             <div className="flex justify-center gap-3 md:gap-4">
@@ -573,11 +573,11 @@ export default function Home() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="grid size-11 md:size-12 place-items-center rounded-xl border border-white/10 bg-white/5 text-gray-400 hover:bg-purple-500/10 hover:text-purple-400 hover:border-purple-500/30 transition-colors"
+                  className="grid size-11 md:size-12 place-items-center rounded-xl border border-slate-200/10 dark:border-white/10 bg-white/80 dark:bg-white/5 text-slate-600 dark:text-gray-400 hover:bg-purple-500/10 hover:text-purple-500 dark:hover:text-purple-400 hover:border-purple-500/30 transition-colors"
                   whileHover={{ scale: 1.1, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Icon className="w-4 h-4 md:w-5 md:h-5" />
+                  <Icon className="w-4 h-4 md:w-5 md:h-5 text-slate-600 dark:text-gray-400" />
                 </motion.a>
               ))}
             </div>

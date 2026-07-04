@@ -10,7 +10,8 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement
-    root.classList.toggle('dark', theme === 'dark')
+    root.classList.remove('dark', 'light')
+    root.classList.add(theme)
     localStorage.setItem('theme', theme)
   }, [theme])
 

@@ -43,7 +43,7 @@ function MagneticIcon({ children, onClick, label }) {
 
   return (
     <button
-      className="grid size-11 flex-shrink-0 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-purple-500/10 text-purple-400 backdrop-blur-xl transition-transform duration-200 ease-out hover:bg-purple-500/20"
+      className="grid size-11 flex-shrink-0 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-purple-500/10 text-purple-400 backdrop-blur-xl transition-transform duration-200 ease-out hover:bg-purple-500/20 dark:bg-purple-500/10 dark:text-purple-400 dark:hover:bg-purple-500/20"
       style={style}
       onMouseMove={move}
       onMouseLeave={() => setStyle({ transform: "translate(0,0)" })}
@@ -72,7 +72,7 @@ function ResumeLink() {
       style={style}
       onMouseMove={move}
       onMouseLeave={() => setStyle({ transform: "translate(0,0)" })}
-      className="hidden flex-shrink-0 items-center gap-2 rounded-lg border border-dashed border-purple-500/30 px-4 py-2.5 text-sm font-semibold text-purple-400 transition-transform duration-200 ease-out hover:bg-purple-500/10 xl:inline-flex"
+      className="hidden flex-shrink-0 items-center gap-2 rounded-lg border border-dashed border-purple-500/30 px-4 py-2.5 text-sm font-semibold text-purple-500 dark:text-purple-400 transition-transform duration-200 ease-out hover:bg-purple-500/10 xl:inline-flex"
     >
       <HiArrowDownTray />
       Resume
@@ -89,12 +89,12 @@ function NavItem({ item, isActive, onClick }) {
       onClick={onClick}
       className={`flex items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-medium transition-colors duration-200 xl:px-3 ${
         isActive
-          ? "bg-purple-500/20 text-white border border-purple-500/40"
-          : "text-gray-300 hover:bg-purple-500/10 hover:text-white"
+          ? "bg-purple-500/20 text-slate-800 dark:text-white border border-purple-500/40 dark:border-purple-500/40"
+          : "text-slate-600 dark:text-gray-300 hover:bg-purple-500/10 hover:text-slate-800 dark:hover:text-white"
       }`}
     >
       <Icon
-        className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-purple-400" : "text-gray-400"}`}
+        className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-purple-400" : "text-slate-500 dark:text-gray-400"}`}
       />
       <span>{item.label}</span>
     </Link>
@@ -107,7 +107,7 @@ function MobileNavItem({ item, onClick }) {
   return (
     <motion.div
       onClick={onClick}
-      className="flex items-center justify-center gap-4 text-2xl font-bold text-white cursor-pointer"
+      className="flex items-center justify-center gap-4 text-2xl font-bold text-slate-800 dark:text-white cursor-pointer"
       whileHover={{ scale: 1.02, x: 10 }}
       whileTap={{ scale: 0.98 }}
       style={{ fontFamily: "var(--font-display)" }}
@@ -160,8 +160,8 @@ export default function Navbar() {
   <div
     className={`mx-auto flex w-full max-w-[1200px] items-center justify-between gap-3 rounded-xl px-4 py-3 transition-all duration-300 ${
       scrolled
-        ? "min-h-[60px] border border-purple-500/20 bg-[#0a0f2c]/95 backdrop-blur-2xl shadow-[0_10px_40px_rgba(10,15,44,0.4)]"
-        : "min-h-[64px] border border-purple-500/10 bg-[#0a0f2c]/80 backdrop-blur-xl"
+        ? "min-h-[60px] border border-purple-500/20 bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] dark:bg-[#0a0f2c]/95 dark:shadow-[0_10px_40px_rgba(10,15,44,0.4)]"
+        : "min-h-[64px] border border-purple-500/10 bg-white/80 backdrop-blur-xl dark:bg-[#0a0f2c]/80"
     }`}
   >
     {/* ================= Logo ================= */}
@@ -178,12 +178,12 @@ export default function Navbar() {
         <img
           src={Logo}
           alt="Ayush Pandey Logo"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover invert dark:invert-0"
         />
       </motion.div>
 
       <strong
-        className="hidden whitespace-nowrap text-lg font-bold text-white sm:block"
+        className="hidden whitespace-nowrap text-lg font-bold text-slate-800 dark:text-white sm:block"
         style={{ fontFamily: "var(--font-display)" }}
       >
         Ayush Pandey
@@ -224,10 +224,10 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <button
         onClick={() => setOpen(true)}
-        className="grid h-11 w-11 place-items-center rounded-lg border border-purple-500/20 bg-white/5 text-white backdrop-blur-xl transition-all duration-300 hover:border-purple-500/40 hover:bg-purple-500/10 lg:hidden"
+        className="grid h-11 w-11 place-items-center rounded-lg border border-purple-500/20 bg-white/5 text-slate-800 backdrop-blur-xl transition-all duration-300 hover:border-purple-500/40 hover:bg-purple-500/10 lg:hidden dark:text-white dark:bg-white/5"
         aria-label="Open menu"
       >
-        <HiBars3 className="h-6 w-6" />
+        <HiBars3 className="h-6 w-6 text-slate-800 dark:text-white" />
       </button>
     </div>
   </div>
@@ -237,18 +237,18 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[120] grid place-items-center bg-[#0a0f2c]/98 text-white"
+            className="fixed inset-0 z-[120] grid place-items-center bg-white/98 text-slate-800 dark:bg-[#0a0f2c]/98 dark:text-white"
             initial={{ clipPath: "circle(0% at 92% 7%)" }}
             animate={{ clipPath: "circle(145% at 92% 7%)" }}
             exit={{ clipPath: "circle(0% at 92% 7%)" }}
             transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
           >
             <button
-              className="absolute right-6 top-6 grid size-11 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-white/5"
+              className="absolute right-6 top-6 grid size-11 place-items-center rounded-lg border border-dashed border-purple-500/30 bg-white/5 dark:bg-white/5"
               onClick={close}
               aria-label="Close menu"
             >
-              <HiXMark />
+              <HiXMark className="text-slate-800 dark:text-white" />
             </button>
 
             <motion.nav
