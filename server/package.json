@@ -4,8 +4,9 @@
   "description": "RAG-powered AI Assistant server for Ayush's portfolio using LangChain and Mistral AI",
   "main": "rag-server.js",
   "scripts": {
+    "dev": "nodemon rag-server.js",
     "start": "node rag-server.js",
-    "dev": "node --watch rag-server.js"
+    "build": "echo \"Build completed successfully\""
   },
   "keywords": [
     "rag",
@@ -24,5 +25,8 @@
     "langchain": "^0.1.23",
     "nodemailer": "^6.10.1",
     "socket.io": "^4.7.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
