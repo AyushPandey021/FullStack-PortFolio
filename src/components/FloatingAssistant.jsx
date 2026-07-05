@@ -35,7 +35,9 @@ export default function FloatingAssistant() {
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
   const socketRef = useRef(null);
+  const autoScrollRef = useRef(true);
 
   useEffect(() => {
     socketRef.current = initializeSocket();
@@ -93,9 +95,40 @@ export default function FloatingAssistant() {
     return () => {};
   }, []);
 
+  const scrollToBottom = (behavior = "smooth") => {
+    if (!autoScrollRef.current) return;
+    messagesEndRef.current?.scrollIntoView({ behavior });
+  };
+
+  // Scroll whenever a new message arrives or loading state changes
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  // Keep scrolling to bottom as the typing effect grows a message's
+  // rendered height over time — a single scroll-on-new-message isn't
+  // enough since the bubble keeps expanding after it's added.
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(() => {
+      scrollToBottom("auto");
+    });
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // If the user scrolls up to read earlier messages, pause auto-scroll
+  // so new content doesn't yank them back down. Resumes once they're
+  // near the bottom again or they send a new message.
+  const handleScroll = () => {
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+    autoScrollRef.current = distanceFromBottom < 60;
+  };
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -108,6 +141,7 @@ export default function FloatingAssistant() {
       timestamp: new Date(),
     };
 
+    autoScrollRef.current = true;
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsLoading(true);
@@ -165,7 +199,14 @@ export default function FloatingAssistant() {
             )}
 
             {/* Messages Container */}
-            <div className="flex-1 space-y-2 overflow-y-auto bg-gradient-to-b from-transparent to-white/50 p-4 dark:to-[#0a0f2c]/50">
+            {/* min-h-0 is the actual fix: flex children default to
+                min-height: auto, which blocks overflow-y-auto from ever
+                engaging inside a flex column. */}
+            <div
+              ref={messagesContainerRef}
+              onScroll={handleScroll}
+              className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain bg-gradient-to-b from-transparent to-white/50 p-4 dark:to-[#0a0f2c]/50"
+            >
               {messages.map((msg) => (
                 <ChatMessage
                   key={msg.id}
