@@ -16,22 +16,16 @@ const nodemailer = require('nodemailer')
 const app = express()
 const server = http.createServer(app)
 
-<<<<<<< HEAD
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
-const FRONTEND_URLS = process.env.FRONTEND_URLS ? process.env.FRONTEND_URLS.split(',') : [
-=======
-const allowedOrigins = [
->>>>>>> fe21b137f169596c64f7048352ace2736f351343
-    'http://localhost:5173',
-    'http://192.168.10.35:5173',
-    'http://localhost:3000',
-]
+// Frontend URLs
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
-<<<<<<< HEAD
-const allowedOrigins = FRONTEND_URLS
-
-=======
->>>>>>> fe21b137f169596c64f7048352ace2736f351343
+const allowedOrigins = process.env.FRONTEND_URLS
+    ? process.env.FRONTEND_URLS.split(",").map((url) => url.trim())
+    : [
+        FRONTEND_URL,
+        "http://192.168.10.35:5173",
+        "http://localhost:3000",
+    ];
 const io = socketIo(server, {
     cors: {
         origin: allowedOrigins,
@@ -52,18 +46,18 @@ const mailUser = process.env.MAIL_USER
 const mailPass = process.env.MAIL_PASS
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: mailUser,
-    pass: mailPass
-  }
+    service: 'gmail',
+    auth: {
+        user: mailUser,
+        pass: mailPass
+    }
 })
 
 // Test mail configuration on startup
 if (mailUser && mailPass) {
-  console.log('✅ Mail configuration loaded')
+    console.log('✅ Mail configuration loaded')
 } else {
-  console.warn('⚠️  Mail credentials not set in .env (MAIL_USER, MAIL_PASS)')
+    console.warn('⚠️  Mail credentials not set in .env (MAIL_USER, MAIL_PASS)')
 }
 
 // ============================================
@@ -359,10 +353,11 @@ io.on('connection', socket => {
 // ============================================
 // API ENDPOINTS
 // ============================================
-<<<<<<< HEAD
+
 app.get('/', (req, res) => {
     res.send("hello from server is Working Fine📍")
-=======
+})
+
 app.get('/health', (req, res) => {
     res.json({
         status: 'ok',
@@ -370,7 +365,7 @@ app.get('/health', (req, res) => {
         chunks: knowledgeChunks.length,
         users: connectedUsers.size
     })
->>>>>>> fe21b137f169596c64f7048352ace2736f351343
+
 })
 
 app.get('/api/rag-status', (req, res) => {
@@ -486,9 +481,9 @@ app.post('/api/contact', async (req, res) => {
 
         // Send email
         const info = await transporter.sendMail(mailOptions)
-        
+
         console.log('✅ Contact email sent:', info.messageId)
-        
+
         return res.json({
             success: true,
             message: 'Message sent successfully! I will get back to you soon.'
@@ -496,7 +491,7 @@ app.post('/api/contact', async (req, res) => {
 
     } catch (error) {
         console.error('❌ Error sending contact email:', error)
-        
+
         // Check for specific Gmail errors
         if (error.code === 'EAUTH') {
             return res.status(401).json({
@@ -526,10 +521,8 @@ async function startServer() {
         console.warn('⚠️  API key too short - get valid key from console.mistral.ai')
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fe21b137f169596c64f7048352ace2736f351343
+
     server.listen(PORT, () => {
         console.log(`\n🎉 Server running on http://localhost:${PORT}`)
         console.log(`📊 Health: http://localhost:${PORT}/health`)
