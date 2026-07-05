@@ -16,15 +16,22 @@ const nodemailer = require('nodemailer')
 const app = express()
 const server = http.createServer(app)
 
+<<<<<<< HEAD
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
 const FRONTEND_URLS = process.env.FRONTEND_URLS ? process.env.FRONTEND_URLS.split(',') : [
+=======
+const allowedOrigins = [
+>>>>>>> fe21b137f169596c64f7048352ace2736f351343
     'http://localhost:5173',
     'http://192.168.10.35:5173',
     'http://localhost:3000',
 ]
 
+<<<<<<< HEAD
 const allowedOrigins = FRONTEND_URLS
 
+=======
+>>>>>>> fe21b137f169596c64f7048352ace2736f351343
 const io = socketIo(server, {
     cors: {
         origin: allowedOrigins,
@@ -352,8 +359,18 @@ io.on('connection', socket => {
 // ============================================
 // API ENDPOINTS
 // ============================================
+<<<<<<< HEAD
 app.get('/', (req, res) => {
     res.send("hello from server is Working Fine📍")
+=======
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        ragReady: knowledgeChunks.length > 0,
+        chunks: knowledgeChunks.length,
+        users: connectedUsers.size
+    })
+>>>>>>> fe21b137f169596c64f7048352ace2736f351343
 })
 
 app.get('/api/rag-status', (req, res) => {
@@ -509,7 +526,10 @@ async function startServer() {
         console.warn('⚠️  API key too short - get valid key from console.mistral.ai')
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fe21b137f169596c64f7048352ace2736f351343
     server.listen(PORT, () => {
         console.log(`\n🎉 Server running on http://localhost:${PORT}`)
         console.log(`📊 Health: http://localhost:${PORT}/health`)
