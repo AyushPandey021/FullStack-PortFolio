@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "RAG-powered AI Assistant server for Ayush Pandey's Portfolio using LangChain and Mistral AI",
   "main": "rag-server.js",
-  "scripts": {
-    "dev": "nodemon rag-server.js",
-    "start": "node rag-server.js"
-  },
+"scripts": {
+  "dev": "nodemon rag-server.js",
+  "start": "node rag-server.js",
+  "build": "echo \"Build completed successfully\""
+},
   "keywords": [
     "rag",
     "langchain",
