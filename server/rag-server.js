@@ -8,6 +8,7 @@ const cors = require('cors')
 const path = require('path')
 const fs = require('fs')
 const https = require('https')
+const nodemailer = require('nodemailer')
 
 // ============================================
 // CONFIGURATION
@@ -33,6 +34,27 @@ const io = socketIo(server, {
 
 app.use(cors({ origin: allowedOrigins, credentials: true }))
 app.use(express.json())
+
+// ============================================
+// MAIL CONFIGURATION
+// ============================================
+const mailUser = process.env.MAIL_USER
+const mailPass = process.env.MAIL_PASS
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: mailUser,
+    pass: mailPass
+  }
+})
+
+// Test mail configuration on startup
+if (mailUser && mailPass) {
+  console.log('✅ Mail configuration loaded')
+} else {
+  console.warn('⚠️  Mail credentials not set in .env (MAIL_USER, MAIL_PASS)')
+}
 
 // ============================================
 // MISTRAL AI - Using RAW REST API only (no SDK)
@@ -346,6 +368,136 @@ app.get('/api/rag-status', (req, res) => {
 })
 
 // ============================================
+// CONTACT FORM ENDPOINT
+// ============================================
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, email, subject, message } = req.body
+
+        // Validate required fields
+        if (!name || !email || !subject || !message) {
+            return res.status(400).json({
+                success: false,
+                error: 'All fields are required: name, email, subject, message'
+            })
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                success: false,
+                error: 'Invalid email format'
+            })
+        }
+
+        // Check if mail is configured
+        if (!mailUser || !mailPass) {
+            console.error('❌ Mail credentials not configured')
+            return res.status(500).json({
+                success: false,
+                error: 'Mail server not configured. Please set MAIL_USER and MAIL_PASS in .env'
+            })
+        }
+
+        const timestamp = new Date().toLocaleString('en-US', {
+            timeZone: 'Asia/Kolkata',
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        })
+
+        // Setup email options with proper from name
+        const mailOptions = {
+            from: `"Ayush Pandey Portfolio" <${mailUser}>`,
+            to: mailUser,
+            subject: `New Contact Form Submission: ${subject}`,
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+                        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px 10px 0 0; }
+                        .content { background: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 10px 10px; }
+                        .field { margin-bottom: 15px; }
+                        .field-label { font-weight: bold; color: #667eea; margin-bottom: 5px; }
+                        .field-value { background: white; padding: 10px; border-radius: 5px; border: 1px solid #eee; }
+                        .timestamp { color: #888; font-size: 12px; margin-top: 20px; text-align: center; border-top: 1px solid #eee; padding-top: 10px; }
+                        .sender { font-size: 14px; color: #666; margin-bottom: 10px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h2>📧 New Contact Form Submission</h2>
+                    </div>
+                    <div class="content">
+                        <div class="sender">
+                            <strong>Received:</strong> ${timestamp}
+                        </div>
+                        
+                        <div class="field">
+                            <div class="field-label">Name:</div>
+                            <div class="field-value">${name}</div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="field-label">Email:</div>
+                            <div class="field-value"><a href="mailto:${email}">${email}</a></div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="field-label">Subject:</div>
+                            <div class="field-value">${subject}</div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="field-label">Message:</div>
+                            <div class="field-value">${message.replace(/\n/g, '<br>')}</div>
+                        </div>
+                        
+                        <div class="timestamp">
+                            This message was sent from your portfolio contact form at Ayush Pandey's website.
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `
+        }
+
+        // Send email
+        const info = await transporter.sendMail(mailOptions)
+        
+        console.log('✅ Contact email sent:', info.messageId)
+        
+        return res.json({
+            success: true,
+            message: 'Message sent successfully! I will get back to you soon.'
+        })
+
+    } catch (error) {
+        console.error('❌ Error sending contact email:', error)
+        
+        // Check for specific Gmail errors
+        if (error.code === 'EAUTH') {
+            return res.status(401).json({
+                success: false,
+                error: 'Authentication failed. Please check your MAIL_USER and MAIL_PASS in .env'
+            })
+        }
+
+        return res.status(500).json({
+            success: false,
+            error: 'Failed to send message. Please try again later.'
+        })
+    }
+})
+
+// ============================================
 // START SERVER
 // ============================================
 const PORT = process.env.PORT || 3000
@@ -364,6 +516,7 @@ async function startServer() {
         console.log(`📊 Health: http://localhost:${PORT}/health`)
         console.log(kbReady ? '✅ Knowledge Base: Ready' : '⚠️  Knowledge Base: Failed')
         console.log(apiKey && apiKey.length >= 30 ? `✅ Mistral API: Configured (${MODEL_NAME})` : '⚠️  Mistral API: Not configured')
+        console.log(mailUser && mailPass ? '✅ Mail Configuration: Ready' : '⚠️  Mail Configuration: Not configured')
         console.log('\n💡 Ready!\n')
     })
 }

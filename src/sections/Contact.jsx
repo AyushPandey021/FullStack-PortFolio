@@ -51,11 +51,11 @@ export default function Contact() {
               <HiMapPin />
               India
             </span>
-            <a href="https://github.com/">
+            <a href="https://github.com/AyushPandey021">
               <FaGithub />
               GitHub
             </a>
-            <a href="https://linkedin.com/">
+            <a href="https://www.linkedin.com/in/ayush-pandey-05922a266">
               <FaLinkedin />
               LinkedIn
             </a>

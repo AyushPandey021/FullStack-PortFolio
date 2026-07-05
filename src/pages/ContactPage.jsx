@@ -20,19 +20,39 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      const response = await fetch('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
       
-      // Reset status after 5 seconds
+      const data = await response.json();
+      
+      if (data.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        // Reset status after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } else {
+        // Show error to user
+        setSubmitStatus('error');
+        console.error('Error:', data.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+      // Reset error status after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000);
-    }, 2000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -246,6 +266,26 @@ export default function ContactPage() {
                     </h3>
                     <p className="text-gray-300">
                       Thank you for reaching out. I'll get back to you as soon as possible.
+                    </p>
+                  </motion.div>
+                ) : submitStatus === 'error' ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-8"
+                  >
+                    <motion.div 
+                      className="grid size-20 place-items-center rounded-full bg-red-500/20 border border-red-500/40 mx-auto mb-4"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <HiPaperAirplane className="w-8 h-8 text-red-400" />
+                    </motion.div>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      Failed to Send Message
+                    </h3>
+                    <p className="text-gray-300">
+                      Please try again later or contact me directly via email.
                     </p>
                   </motion.div>
                 ) : (

@@ -4,7 +4,8 @@
 
 **Name:** Ayush Pandey  
 **Location:** Hyderabad, India  
-**Focus Areas:** Full Stack Development, AI Engineering, Cloud Architecture  
+**Primary Language:** JavaScript  
+**Focus Areas:** Full Stack Development, AI Engineering, Cloud Architecture, JavaScript, Python  
 **Availability:** Open to product teams and clients
 
 ### Core Titles
@@ -13,6 +14,16 @@
 - AI Engineer
 - MERN Stack Developer
 - Python Developer
+
+### Primary Technologies
+
+**Languages:** JavaScript (Primary), Python, TypeScript
+
+**Frontend:** React, Next.js, Tailwind CSS, Redux, Framer Motion, GSAP
+
+**Backend:** Node.js, Express.js, FastAPI
+
+**Databases:** MongoDB, MySQL, PostgreSQL, Redis
 
 ### Key Statistics
 
@@ -319,6 +330,9 @@
 1. "Designing RAG Apps That Recruiters Can Actually Trust" - AI Engineering (6 min read)
 2. "The Full Stack Checklist I Use Before Shipping Client Work" - Engineering (8 min read)
 3. "Making React Interfaces Feel Premium Without Making Them Heavy" - Frontend (5 min read)
+4. "Mastering JavaScript: From Fundamentals to Advanced Patterns" - JavaScript Development (7 min read)
+5. "Building Scalable Backends with Express.js and FastAPI" - Backend Development (6 min read)
+6. "Full Stack JavaScript: From Frontend to Backend with Node.js" - JavaScript Ecosystem (8 min read)
 
 ### Areas of Expertise for Discussion
 
@@ -328,6 +342,11 @@
 - Component design and animation
 - Database optimization
 - DevOps and CI/CD pipelines
+- JavaScript (ES6+) development and best practices
+- Python backend development with FastAPI
+- Node.js and Express.js server development
+- MongoDB and MySQL database design
+- MERN/MEAN stack architecture
 
 ---
 

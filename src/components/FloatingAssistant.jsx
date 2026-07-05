@@ -60,6 +60,7 @@ export default function FloatingAssistant() {
     });
 
     onMessageReceived((data) => {
+      autoScrollRef.current = true;
       setMessages((prev) => [
         ...prev,
         {
@@ -75,6 +76,7 @@ export default function FloatingAssistant() {
     });
 
     onError((data) => {
+      autoScrollRef.current = true;
       setIsLoading(false);
       const errorMessage =
         data.error || data.message || "An error occurred. Please try again.";
@@ -102,7 +104,10 @@ export default function FloatingAssistant() {
 
   // Scroll whenever a new message arrives or loading state changes
   useEffect(() => {
-    scrollToBottom();
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 50);
+    return () => clearTimeout(timer);
   }, [messages, isLoading]);
 
   // Keep scrolling to bottom as the typing effect grows a message's
@@ -153,7 +158,7 @@ export default function FloatingAssistant() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="relative flex h-[500px] w-[min(380px,calc(100vw-40px))] flex-col overflow-hidden rounded-2xl border border-purple-500/10 bg-white/95 shadow-premium ring-1 ring-purple-500/10 backdrop-blur-2xl dark:border-purple-500/20 dark:bg-[#0a0f2c]/95 dark:ring-purple-500/10"
+            className="relative flex h-[500px] w-[min(380px,calc(100vw-40px))] flex-col rounded-2xl border border-purple-500/10 bg-white/95 shadow-premium ring-1 ring-purple-500/10 backdrop-blur-2xl dark:border-purple-500/20 dark:bg-[#0a0f2c]/95 dark:ring-purple-500/10"
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.96 }}
@@ -199,13 +204,11 @@ export default function FloatingAssistant() {
             )}
 
             {/* Messages Container */}
-            {/* min-h-0 is the actual fix: flex children default to
-                min-height: auto, which blocks overflow-y-auto from ever
-                engaging inside a flex column. */}
+            {/* min-h-0 allows flex child to shrink below its content height */}
             <div
               ref={messagesContainerRef}
               onScroll={handleScroll}
-              className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain bg-gradient-to-b from-transparent to-white/50 p-4 dark:to-[#0a0f2c]/50"
+              className="min-h-0 flex-1 space-y-2 overflow-y-scroll p-4 chat-messages-container"
             >
               {messages.map((msg) => (
                 <ChatMessage

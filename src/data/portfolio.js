@@ -282,7 +282,7 @@ export const blogs = [
 ]
 
 export const socials = [
-  ['GitHub', FaGithub, 'https://github.com/'],
-  ['LinkedIn', FaLinkedin, 'https://linkedin.com/'],
+  ['GitHub', FaGithub, 'https://github.com/AyushPandey021'],
+  ['LinkedIn', FaLinkedin, 'https://www.linkedin.com/in/ayush-pandey-05922a266'],
   ['Twitter', FaTwitter, 'https://twitter.com/'],
 ]
