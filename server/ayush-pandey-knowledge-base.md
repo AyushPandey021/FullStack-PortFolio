@@ -3,7 +3,7 @@
 ## Profile Overview
 
 **Name:** Ayush Pandey  
-**Location:** India  
+**Location:** Hyderabad, India  
 **Focus Areas:** Full Stack Development, AI Engineering, Cloud Architecture  
 **Availability:** Open to product teams and clients
 
@@ -80,16 +80,19 @@
 
 ## Professional Experience
 
-### Product Engineering Lab
+### ITRadiant (MNC)
 
 **Position:** Full Stack Developer  
-**Duration:** 2024 - Present
+**Duration:** 2024 - Present  
+**Location:** Hyderabad, India
 
 **Responsibilities:**
 
+- Delivering high-quality, production-ready products and solutions for the company
 - Built MERN applications with clean APIs, secure authentication, and responsive dashboards
 - Integrated AI-assisted workflows using RAG, vector search, and production-grade prompt pipelines
 - Shipped CI/CD pipelines, Dockerized services, and observability-friendly backend patterns
+- Collaborating with cross-functional teams to build scalable and innovative solutions
 - Technologies: React, Node.js, MongoDB, Python, Docker, AWS
 
 ### Independent Client Studio
@@ -114,6 +117,22 @@
 - Prototyped developer tools, data-driven apps, and AI experiments across JavaScript/Python stack
 - Practiced performance profiling, accessibility review, and resilient state-management patterns
 - Technologies: JavaScript, Python, PostgreSQL, Redis, GitHub Actions
+
+---
+
+## Education
+
+### Bachelor of Computer Applications (BCA)
+
+**Institution:** Makhanlal Chaturvedi National University of Journalism and Communication, Bhopal  
+**Duration:** 2022 - 2025  
+**Status:** Completed
+
+**Key Learnings:**
+- Strong foundation in computer science fundamentals and programming
+- Web development and software engineering principles
+- Database management and system design
+- Project-based learning with practical applications
 
 ---
 
@@ -331,7 +350,7 @@ Ayush is **open to**:
 - Open source collaboration
 - Freelance and contract work
 
-**Location:** India  
+**Location:** Hyderabad, India  
 **Time Zone:** IST (Indian Standard Time)
 
 ---
@@ -346,6 +365,21 @@ Ayush is **open to**:
 - Designing secure, scalable backend systems
 - DevOps and cloud infrastructure
 - Mentoring and knowledge sharing
+- Enterprise-grade application development at MNC level
+
+### Current Status
+
+- **Currently Working:** Full Stack Developer at ITRadiant (MNC), Hyderabad
+- **Location:** Hyderabad, India
+- **Focus:** Delivering best-in-class products and solutions for enterprise clients
+- **Commitment:** Building innovative, scalable, and high-performance applications
+
+### Career Highlights
+
+- Successfully delivering enterprise solutions at ITRadiant, a leading MNC
+- Recognized for building high-quality products that meet and exceed company standards
+- Strong track record of project delivery and client satisfaction
+- Continuous learning and adaptation to latest technologies and best practices
 
 ### Approach to Projects
 
