@@ -1,6 +1,3 @@
-// server.js
-require('dotenv').config()
-
 const express = require('express')
 const http = require('http')
 const socketIo = require('socket.io')
@@ -9,7 +6,7 @@ const path = require('path')
 const fs = require('fs')
 const https = require('https')
 const nodemailer = require('nodemailer')
-
+require('dotenv').config()
 // ============================================
 // CONFIGURATION
 // ============================================
