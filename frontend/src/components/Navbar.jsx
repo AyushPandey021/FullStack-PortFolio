@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext.jsx";
@@ -15,7 +15,28 @@ import {
   HiEnvelope,
   HiDocumentText,
 } from "react-icons/hi2";
-import Logo from "../Assets/logo.png";
+function BrandMark({ className = "" }) {
+  return (
+    <motion.svg
+      viewBox="0 0 64 64"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+      whileHover={{ rotate: -4, scale: 1.04 }}
+      transition={{ type: "spring", stiffness: 320, damping: 18 }}
+    >
+      <rect width="64" height="64" rx="18" fill="#11132B" />
+      <rect x="1" y="1" width="62" height="62" rx="17" stroke="url(#markBorder)" strokeWidth="2" />
+      <path d="M10 44 25.2 16h6.3l9.1 17.2h-7.1l-5.2-10.4L22.5 34h9.3l3.1 6H19.4l-2.1 4H10Z" fill="url(#markFill)" />
+      <path d="M39 17h7.1C52.7 17 57 20.6 57 26.4c0 5.9-4.3 9.6-10.9 9.6h-2.4v8H37V30h8.5c3.1 0 4.9-1.2 4.9-3.6 0-2.3-1.8-3.5-4.9-3.5H39V17Z" fill="#F7F8FF" />
+      <circle cx="53" cy="12" r="3" fill="#42E8E0" />
+      <defs>
+        <linearGradient id="markFill" x1="11" y1="16" x2="41" y2="47"><stop stopColor="#A99DFF" /><stop offset="1" stopColor="#6C5CE7" /></linearGradient>
+        <linearGradient id="markBorder" x1="3" y1="2" x2="61" y2="62"><stop stopColor="#A99DFF" /><stop offset="0.55" stopColor="#6C5CE7" /><stop offset="1" stopColor="#42E8E0" /></linearGradient>
+      </defs>
+    </motion.svg>
+  );
+}
 // Add icons to navItems
 const navItemsWithIcons = navItems.map((item) => {
   const iconMap = {
@@ -143,23 +164,13 @@ export default function Navbar() {
             className="flex flex-shrink-0 items-center gap-3"
             aria-label="Ayush Pandey home"
           >
-            <motion.div
-              whileHover={{ scale: 1.05, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-              className="grid size-10 flex-shrink-0 place-items-center overflow-hidden rounded-lg border border-dashed border-purple-500/40 bg-gradient-to-br from-purple-500 to-cyan-500"
-            >
-              <img
-                src={Logo}
-                alt="Ayush Pandey Logo"
-                className="h-full w-full object-cover dark:invert"
-              />
-            </motion.div>
+            <BrandMark className="size-10 flex-shrink-0 drop-shadow-[0_8px_18px_rgba(108,92,231,0.3)]" />
 
             <strong
               className="hidden whitespace-nowrap text-lg font-bold text-slate-800 dark:text-white sm:block"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Ayush Pandey
+              Ayush<span className="text-purple-500">.</span>
             </strong>
           </Link>
 

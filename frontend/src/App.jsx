@@ -17,7 +17,7 @@ import ProjectsPage from "./pages/ProjectsPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import SkillsPage from "./pages/SkillsPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
-import ResumePage from "./pages/ResumePage.jsx";
+// import ResumePage from "./pages/ResumePage.jsx";
 
 export default function App() {
   const location = useLocation();
@@ -107,14 +107,7 @@ function RoutesContent({ location }) {
               </PageTransition>
             }
           />
-          <Route
-            path="/resume"
-            element={
-              <PageTransition>
-                <ResumePage />
-              </PageTransition>
-            }
-          />
+
           <Route
             path="*"
             element={
