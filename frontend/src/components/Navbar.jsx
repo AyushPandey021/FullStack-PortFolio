@@ -26,13 +26,34 @@ function BrandMark({ className = "" }) {
       transition={{ type: "spring", stiffness: 320, damping: 18 }}
     >
       <rect width="64" height="64" rx="18" fill="#11132B" />
-      <rect x="1" y="1" width="62" height="62" rx="17" stroke="url(#markBorder)" strokeWidth="2" />
-      <path d="M10 44 25.2 16h6.3l9.1 17.2h-7.1l-5.2-10.4L22.5 34h9.3l3.1 6H19.4l-2.1 4H10Z" fill="url(#markFill)" />
-      <path d="M39 17h7.1C52.7 17 57 20.6 57 26.4c0 5.9-4.3 9.6-10.9 9.6h-2.4v8H37V30h8.5c3.1 0 4.9-1.2 4.9-3.6 0-2.3-1.8-3.5-4.9-3.5H39V17Z" fill="#F7F8FF" />
+      <rect
+        x="1"
+        y="1"
+        width="62"
+        height="62"
+        rx="17"
+        stroke="url(#markBorder)"
+        strokeWidth="2"
+      />
+      <path
+        d="M10 44 25.2 16h6.3l9.1 17.2h-7.1l-5.2-10.4L22.5 34h9.3l3.1 6H19.4l-2.1 4H10Z"
+        fill="url(#markFill)"
+      />
+      <path
+        d="M39 17h7.1C52.7 17 57 20.6 57 26.4c0 5.9-4.3 9.6-10.9 9.6h-2.4v8H37V30h8.5c3.1 0 4.9-1.2 4.9-3.6 0-2.3-1.8-3.5-4.9-3.5H39V17Z"
+        fill="#F7F8FF"
+      />
       <circle cx="53" cy="12" r="3" fill="#42E8E0" />
       <defs>
-        <linearGradient id="markFill" x1="11" y1="16" x2="41" y2="47"><stop stopColor="#A99DFF" /><stop offset="1" stopColor="#6C5CE7" /></linearGradient>
-        <linearGradient id="markBorder" x1="3" y1="2" x2="61" y2="62"><stop stopColor="#A99DFF" /><stop offset="0.55" stopColor="#6C5CE7" /><stop offset="1" stopColor="#42E8E0" /></linearGradient>
+        <linearGradient id="markFill" x1="11" y1="16" x2="41" y2="47">
+          <stop stopColor="#A99DFF" />
+          <stop offset="1" stopColor="#6C5CE7" />
+        </linearGradient>
+        <linearGradient id="markBorder" x1="3" y1="2" x2="61" y2="62">
+          <stop stopColor="#A99DFF" />
+          <stop offset="0.55" stopColor="#6C5CE7" />
+          <stop offset="1" stopColor="#42E8E0" />
+        </linearGradient>
       </defs>
     </motion.svg>
   );
@@ -44,7 +65,7 @@ const navItemsWithIcons = navItems.map((item) => {
     About: HiUser,
     Skills: HiCodeBracket,
     Projects: HiBriefcase,
-    Resume: HiDocumentText,
+  
     Contact: HiEnvelope,
   };
   return {
